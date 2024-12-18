@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jang's Bilao</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4b3621;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-family: 'Cursive', sans-serif;
+            font-weight: bold;
+        }
+        header img {
+            max-height: 100px;
+        }
+        /* Shop info and cart */
+        .shop-info {
+            background-color: #4b3621;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .shop-info p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .shop-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .cart-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-btn:hover {
+            background-color: #4b3621;
+        }
+
+        /* Menu */
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .menu-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 15px;
+        }
+        .menu-item h3 {
+            background-color: #4b3621;
+            color: white;
+            margin: 0;
+            padding: 10px 0;
+        }
+        .menu-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .menu-item button {
+            background-color: #4b3621;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-item button:hover {
+            background-color: #333;
+        }
+        .price-box {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .price-box h5 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .add-to-cart-btn {
+            background-color: #4b3621;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #333;
+        }
+        footer {
+            background-color: #4b3621;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        .cart-summary {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .cart-summary h3 {
+            margin-bottom: 10px;
+        }
+        .cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cart-items li {
+            margin: 5px 0;
+        }
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .clear-cart-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .clear-cart-btn:hover {
+            background-color: darkred;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+
+            .shop-info {
+                padding: 15px;
+            }
+
+            .cart-btn {
+                width: 100%;
+            }
+
+            .menu-item {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-placeholder.png" alt="Jang's Bilao Logo">
+        <h1>Welcome to Jang's Bilao</h1>
+    </header>
+
+    <!-- Shop Info Section -->
+    <div class="shop-info">
+        <p>Visit our shop at: 123 Main Street, City</p>
+        <p>Contact us: 
+            <a href="https://www.facebook.com/JangsBilao" target="_blank">Facebook</a> | 
+            <a href="tel:+1234567890">Mobile: +1234567890</a>
+        </p>
+        <button class="cart-btn" onclick="window.location.href='#cart-summary'">View Cart</button>
+    </div>
+
+    <section class="menu">
+        <!-- Pancit Bihon -->
+        <div class="menu-item" id="pancit-bihon">
+            <h3>Pancit Bihon</h3>
+            <img src="pancit-bihon.jpg" alt="Pancit Bihon">
+            <div class="price-box">
+                <h5>Small: PHP 300</h5>
+                <h5>Medium: PHP 500</h5>
+                <h5>Large: PHP 700</h5>
+                <h5>XL: PHP 1000</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Bihon', 300, 'Small')">Add to Cart (Small - PHP 300)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Bihon', 500, 'Medium')">Add to Cart (Medium - PHP 500)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Bihon', 700, 'Large')">Add to Cart (Large - PHP 700)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Bihon', 1000, 'XL')">Add to Cart (XL - PHP 1000)</button>
+        </div>
+
+        <!-- Lumpiang Shanghai -->
+        <div class="menu-item" id="lumpiang-shanghai">
+            <h3>Lumpiang Shanghai</h3>
+            <img src="lumpiang-shanghai.jpg" alt="Lumpiang Shanghai">
+            <div class="price-box">
+                <h5>Small: PHP 200</h5>
+                <h5>Medium: PHP 400</h5>
+                <h5>Large: PHP 600</h5>
+                <h5>XL: PHP 800</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Lumpiang Shanghai', 200, 'Small')">Add to Cart (Small - PHP 200)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Lumpiang Shanghai', 400, 'Medium')">Add to Cart (Medium - PHP 400)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Lumpiang Shanghai', 600, 'Large')">Add to Cart (Large - PHP 600)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Lumpiang Shanghai', 800, 'XL')">Add to Cart (XL - PHP 800)</button>
+        </div>
+
+        <!-- Mahablanca -->
+        <div class="menu-item" id="mahablanca">
+            <h3>Mahablanca</h3>
+            <img src="mahablanca.jpg" alt="Mahablanca">
+            <div class="price-box">
+                <h5>Small: PHP 250</h5>
+                <h5>Medium: PHP 400</h5>
+                <h5>Large: PHP 600</h5>
+                <h5>XL: PHP 850</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Mahablanca', 250, 'Small')">Add to Cart (Small - PHP 250)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Mahablanca', 400, 'Medium')">Add to Cart (Medium - PHP 400)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Mahablanca', 600, 'Large')">Add to Cart (Large - PHP 600)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Mahablanca', 850, 'XL')">Add to Cart (XL - PHP 850)</button>
+        </div>
+
+        <!-- Pancit Malabon -->
+        <div class="menu-item" id="pancit-malabon">
+            <h3>Pancit Malabon</h3>
+            <img src="pancit-malabon.jpg" alt="Pancit Malabon">
+            <div class="price-box">
+                <h5>Small: PHP 350</h5>
+                <h5>Medium: PHP 600</h5>
+                <h5>Large: PHP 850</h5>
+                <h5>XL: PHP 1200</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Malabon', 350, 'Small')">Add to Cart (Small - PHP 350)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Malabon', 600, 'Medium')">Add to Cart (Medium - PHP 600)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Malabon', 850, 'Large')">Add to Cart (Large - PHP 850)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Pancit Malabon', 1200, 'XL')">Add to Cart (XL - PHP 1200)</button>
+        </div>
+
+        <!-- Bread Roll -->
+        <div class="menu-item" id="bread-roll">
+            <h3>Bread Roll</h3>
+            <img src="bread-roll.jpg" alt="Bread Roll">
+            <div class="price-box">
+                <h5>Small: PHP 150</h5>
+                <h5>Medium: PHP 250</h5>
+                <h5>Large: PHP 350</h5>
+                <h5>XL: PHP 450</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Bread Roll', 150, 'Small')">Add to Cart (Small - PHP 150)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Bread Roll', 250, 'Medium')">Add to Cart (Medium - PHP 250)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Bread Roll', 350, 'Large')">Add to Cart (Large - PHP 350)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Bread Roll', 450, 'XL')">Add to Cart (XL - PHP 450)</button>
+        </div>
+
+        <!-- Puto -->
+        <div class="menu-item" id="puto">
+            <h3>Puto (Leche Flan, Salted Egg)</h3>
+            <img src="puto.jpg" alt="Puto">
+            <div class="price-box">
+                <h5>Small: PHP 100</h5>
+                <h5>Medium: PHP 150</h5>
+                <h5>Large: PHP 200</h5>
+                <h5>XL: PHP 300</h5>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart('Puto (Leche Flan)', 100, 'Small')">Add to Cart (Leche Flan - Small)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Puto (Salted Egg)', 150, 'Medium')">Add to Cart (Salted Egg - Medium)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Puto', 200, 'Large')">Add to Cart (Large)</button>
+            <button class="add-to-cart-btn" onclick="addToCart('Puto', 300, 'XL')">Add to Cart (XL)</button>
+        </div>
+    </section>
+
+    <!-- Cart Summary -->
+    <section id="cart-summary" class="cart-summary">
+        <h3>Cart Summary</h3>
+        <ul class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div class="cart-total">
+            Total: PHP <span id="cart-total">0</span>
+        </div>
+        <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Jang's Bilao. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item, price, size) {
+            cart.push({ item, price, size });
+            updateCart();
+        }
+
+        function updateCart() {
+            let cartItems = document.getElementById('cart-items');
+            let cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(function (cartItem) {
+                let listItem = document.createElement('li');
+                listItem.textContent = `${cartItem.item} - ${cartItem.size} - PHP ${cartItem.price}`;
+                cartItems.appendChild(listItem);
+                total += cartItem.price;
+            });
+
+            cartTotal.textContent = total;
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCart();
+        }
+    </script>
+</body>
+</html>
